@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#eeede5"><meta name="description" content="叶序：一片叶子，一段四季。以真实叶片纹理与风的物理模拟，感受时间缓慢流动的交互视觉实验。">
+  <title>叶序 LEAF — 一片叶子的四季</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath fill='%23757e4f' d='M42 5C5 5 2 28 18 36c18 7 23-15 24-31Z'/%3E%3Cpath stroke='%23eeede5' fill='none' d='M10 46 34 14'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script src="assets/matter.min.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+  <div class="paper" aria-hidden="true"></div>
+  <div class="experience" id="experience">
+    <header class="header">
+      <a class="brand" href="#" aria-label="叶序首页"><svg viewBox="0 0 36 40" fill="none"><path d="M29 3C6 4 0 21 12 29 27 36 33 14 29 3Z" stroke="currentColor"/><path d="m6 37 19-26M14 25l-3-9m9 1 7-2" stroke="currentColor"/></svg><span>叶序<span class="brand-en">LEAF</span></span><span class="brand-rule"></span><span class="brand-caption">一片叶子的四季<br><small>A STUDY OF SEASONS</small></span></a>
+      <nav aria-label="主导航"><button class="nav-active" id="experienceBtn">四季实验 <span>↗</span></button><button id="aboutBtn">关于叶序 <span>＋</span></button></nav>
+      <div class="date"><i></i><span id="date">—</span><span class="date-label">此刻，正值<span id="currentSeason">秋</span>季</span></div>
+    </header>
+
+    <main class="stage" id="stage">
+      <div class="stage-top"><span>自然观察实验室 <span class="muted">/</span> VOL. 001</span><span class="top-right">TIME MOVES. NATURE FOLLOWS.</span></div>
+      <div class="orbit orbit-one" aria-hidden="true"></div><div class="orbit orbit-two" aria-hidden="true"></div>
+      <div class="cross cross-one" aria-hidden="true">＋</div><div class="cross cross-two" aria-hidden="true">＋</div>
+      <div class="ghost" id="ghost" aria-hidden="true">Autumn</div>
+      <section class="intro" aria-live="polite">
+        <div class="season-kicker"><span id="seasonNumber">03</span><span class="short-rule"></span><span id="seasonEnglish">AUTUMN</span><span class="season-tag" id="seasonRange">09 — 11</span></div>
+        <h1 id="headline">一叶知秋，<br><span>万物有时。</span></h1>
+        <p class="intro-copy" id="seasonCopy">从一抹金黄，到一场温柔的告别。<br>让风经过，让时间慢慢显影。</p>
+        <button class="wind-button" id="gustBtn"><span class="wind-icon">≋</span> 唤起一阵风 <span class="arrow">↗</span></button>
+        <div class="interaction-note"><span class="tiny-cross">＋</span> 移动指针，让风有了方向</div>
+      </section>
+
+      <div class="specimen" id="specimen" role="img" aria-label="随风摆动、随四季变色的真实枫叶"><img src="assets/leaf.png" alt="清晰可见叶脉与锯齿边缘的枫叶" id="heroLeaf" fetchpriority="high"></div>
+      <canvas id="leaves" aria-hidden="true"></canvas>
+      <div class="specimen-caption"><span class="caption-line"></span><span>ACER <span class="muted">/</span> 枫叶<br><small>一片叶，收藏整个季节。</small></span><span class="caption-no">NO. 001</span></div>
+
+      <aside class="season-nav" aria-label="选择季节">
+        <span class="vertical-label">THE SEASONAL CYCLE</span>
+        <button data-season="0" aria-label="进入春季"><span>01</span><i></i><b>春</b></button>
+        <button data-season="1" aria-label="进入夏季"><span>02</span><i></i><b>夏</b></button>
+        <button data-season="2" aria-label="进入秋季"><span>03</span><i></i><b>秋</b></button>
+        <button data-season="3" aria-label="进入冬季"><span>04</span><i></i><b>冬</b></button>
+        <span class="cycle-mark">↻</span>
+      </aside>
+
+      <div class="field-readings"><span class="readings-title"><i></i> 环境观测 <small>SIMULATED</small></span><div><span>风速</span><b id="windReadout">1.8 <small>m/s</small></b><span class="wind-bars" aria-hidden="true">▁▃▂▅▃▆▂▃▅▂▁</span></div><div><span>叶片状态</span><b id="leafState">缓缓飘落</b><span class="status-dot">●</span></div></div>
+      <div class="scroll-hint"><span class="scroll-line"></span><span>向下滚动，走过四季<small>SCROLL TO FEEL THE CHANGE</small></span><span class="scroll-down">↓</span></div>
+      <div class="page-coordinate"><span id="progressNumber">00</span> <span>/ ∞</span><small>四季往复 · 生生不息</small></div>
+    </main>
+
+    <footer class="footer"><span class="footer-poem">把时间交给一片叶子。</span><div class="controls"><label for="windRange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 8h13c6 0 5-7 1-5M2 12h18c4 0 3 6 0 5M2 16h8c4 0 3 6 0 4"/></svg>风力</label><input type="range" id="windRange" min="0" max="100" value="32" aria-label="调节风力"><span id="windLabel">微风</span><span class="control-divider"></span><button id="pauseBtn" aria-label="暂停动效"><span id="pauseIcon">Ⅱ</span><span id="pauseLabel">暂停</span></button><button class="sound-btn" id="soundBtn" aria-pressed="false" aria-label="开启风声"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9h4l5-4v14l-5-4H3Z"/><path id="soundPath" d="m17 9 5 6m0-6-5 6"/></svg></button></div><span class="footer-meta">DESIGNED BY NATURE <span>© 2026</span></span></footer>
+    <div class="season-progress" aria-hidden="true"><div id="progressBar"></div></div>
+  </div>
+  <div id="scrollTrack" aria-hidden="true"></div>
+
+  <dialog id="aboutDialog"><button class="dialog-close" aria-label="关闭关于">×</button><span class="dialog-kicker">A NOTE ON THIS EXPERIMENT</span><h2>在一片叶子里，<br>看见时间。</h2><p>叶序是一场缓慢的自然观察。我们用一片真实叶子的纹理，描绘四季的色彩；用风、重力与空气阻力，让每一次飘落都稍有不同。</p><dl><div><dt>时间的起点</dt><dd>按 Asia/Shanghai 标准日期，以北半球气象季节进入：3—5 月春、6—8 月夏、9—11 月秋、12—2 月冬。</dd></div><div><dt>与风互动</dt><dd>移动指针改变局部气流；点击「唤起一阵风」吹起叶片。底部可调节风力、开启合成风声或暂停动效。</dd></div><div><dt>慢慢经过</dt><dd>每季约停留两屏滚动距离，再缓缓过渡。四季可以一直循环，也可以用右侧刻度直接抵达。</dd></div></dl><p class="colophon">叶片基于摄影纹理，经透明背景处理；季节色彩为艺术化演绎，冬季呈枯叶褐色。风场为 Matter.js 物理模拟，并非实时气象数据。<a href="https://www.pngwing.com/tr/free-png-yzxvl" target="_blank" rel="noopener">叶片原图 ↗</a></p></dialog>
+  <div class="toast" id="toast" role="status"></div>
+</body>
+</html>
